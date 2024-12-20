@@ -1,10 +1,9 @@
-import env from '../.env'
 import { Telegraf, Markup, session } from 'telegraf'
 import { getAuthToken, createPayment, confirmPayment } from './routes.js'
 import { getPixCode } from './crawler.js'
 
 // telegram
-const bot = new Telegraf(env.token)
+const bot = new Telegraf(process.env.token)
 
 bot.use(
   session({
@@ -33,7 +32,7 @@ const confirm = Markup.inlineKeyboard([
 bot.start(async ctx => {
   const name = ctx.update.message.from.first_name;
   await ctx.reply(`Seja bem vindo ${name}!`)
-  await ctx.replyWithHTML(`Você está na página de compra do: <b>${env.channel}</b>`)
+  await ctx.replyWithHTML(`Você está na página de compra do: <b>${process.env.channel}</b>`)
   await ctx.reply(`Escolha o plano que deseja adquirir:`, botoes)
 })
 
@@ -85,14 +84,14 @@ bot.action('yes', async ctx => {
     // Responde com base no resultado
     if (isConfirmed) {
       if (ctx.session.plan == 1) {
-        await bot.telegram.sendMessage(env.id_owner, `Venda do plano mensal do ${env.channel} no valor de R$10,00 realizada.`)
+        await bot.telegram.sendMessage(process.env.id_owner, `Venda do plano mensal do ${process.env.channel} no valor de R$10,00 realizada.`)
       } else if (ctx.session.plan == 2) {
-        await bot.telegram.sendMessage(env.id_owner, `Venda do plano mensal do ${env.channel} no valor de R$10,00 realizada.`)
+        await bot.telegram.sendMessage(process.env.id_owner, `Venda do plano mensal do ${process.env.channel} no valor de R$10,00 realizada.`)
       } else {
         console.log('erro')
       }
       await ctx.reply('Pagamento confirmado! Agradecemos a confiança!');
-      await ctx.replyWithHTML(`Link do <b>${env.channel}</b>: ${env.link_channel}`)
+      await ctx.replyWithHTML(`Link do <b>${process.env.channel}</b>: ${process.env.link_channel}`)
       // limpa os dados da sessão após confirmar o pagamento
       ctx.session = null
     } else {

@@ -1,17 +1,15 @@
 import express from 'express'
 import axios from 'axios'
-import env from '../.env'
-
-
 
 // Configurações da API
 const AUTH_URL = 'https://oauth.livepix.gg/oauth2/auth'
 const GET_TOKEN = 'https://oauth.livepix.gg/oauth2/token'
 const PAYMENT_URL = 'https://api.livepix.gg/v2/payments'
-const CLIENT_ID = env.client_id
-const CLIENT_SECRET = env.client_secret
+const CLIENT_ID = process.env.client_id
+const CLIENT_SECRET = process.env.client_secret
 
 const app = express();
+const PORT = process.env.port || 3000;
 
 app.use(express.json());
 
@@ -79,3 +77,11 @@ return response.data;
 } catch (error) {
   console.error('Erro ao confirmar pagamento:', error.response.data || error.message);
 }}
+
+app.get('/', (req, res) => {
+  res.send('Bot do Telegram está rodando.');
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
