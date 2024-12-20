@@ -77,11 +77,3 @@ return response.data;
 } catch (error) {
   console.error('Erro ao confirmar pagamento:', error.response.data || error.message);
 }}
-
-app.get('/', (req, res) => {
-  res.send('Bot do Telegram está rodando.');
-});
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
