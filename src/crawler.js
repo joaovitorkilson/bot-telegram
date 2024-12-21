@@ -7,6 +7,7 @@ export async function getPixCode(payment_url) {
   try {
     // Inicializa o navegador
     browser = await puppeteer.launch({
+      executablePath: '/opt/render/.cache/puppeteer/chrome/linux-131.0.6778.204/chrome',
       headless: true, // Certifique-se de rodar no modo headless em produção
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'], // Opções para ambientes como Docker
     });
