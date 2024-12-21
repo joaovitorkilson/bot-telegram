@@ -86,7 +86,7 @@ bot.action('yes', async ctx => {
       if (ctx.session.plan == 1) {
         await bot.telegram.sendMessage(process.env.id_owner, `Venda do plano mensal do ${process.env.channel} no valor de R$10,00 realizada.`)
       } else if (ctx.session.plan == 2) {
-        await bot.telegram.sendMessage(process.env.id_owner, `Venda do plano mensal do ${process.env.channel} no valor de R$10,00 realizada.`)
+        await bot.telegram.sendMessage(process.env.id_owner, `Venda do plano mensal do ${process.env.channel} no valor de R$15,00 realizada.`)
       } else {
         console.log('erro')
       }
